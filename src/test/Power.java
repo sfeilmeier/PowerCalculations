@@ -11,7 +11,15 @@ class Power {
 }
 
 class PowerUtils {
-
+	/*
+	 * Power
+	 */
+	public static Power getPower(ApparentPower s, PowerFactor phi) {
+		double p = phi.value() * s.value();
+		double q = Math.sin(Math.acos(phi.value())) * s.value();
+		return new Power(new ActivePower(p), new ReactivePower(q));
+	}
+	
 	/*
 	 * Active
 	 */
@@ -88,7 +96,7 @@ class ReactivePower extends AbstractPower {
 
 	@Override
 	public String toString() {
-		return value() + " VA";
+		return value() + " var";
 	}
 }
 
@@ -99,7 +107,7 @@ class ApparentPower extends AbstractPower {
 
 	@Override
 	public String toString() {
-		return value() + " var";
+		return value() + " VA";
 	}
 }
 
